@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+class Solution {
+public:
+    int numberofpaths(int m,int n,int max_m,int max_n, vector<vector<int>> &dp){
+
+        //out of bound : return
+        if (m>max_m || n>max_n){return 0;}
+        else if (m==max_m && n==max_n) {return 1;}
+        
+        //down or left
+        if (dp[m][n]!=-1) return dp[m][n];
+        else return dp[m][n]= numberofpaths(m,n+1,max_m,max_n,dp) + numberofpaths(m+1,n,max_m,max_n,dp);
+    
+    }
+    
+    int uniquePaths(int m, int n) {
+        
+        vector<vector<int>> hashtable(m, vector<int>(n, -1));        
+        int ans = numberofpaths(0,0,m-1,n-1,hashtable); 
+        return ans;
+        
+    }
+};
